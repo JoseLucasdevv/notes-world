@@ -91,6 +91,8 @@ export function Dashboard() {
         setTotalPages(response.data.maxPage);
       } catch (error) {
         if (axios.isAxiosError(error)) {
+          console.error(error);
+
           toast.error("Error getting notes!", {
             position: "top-right",
             autoClose: 5000,
@@ -102,9 +104,7 @@ export function Dashboard() {
           });
         }
       } finally {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
+        setIsLoading(false);
       }
     },
     [cookie.token],
@@ -114,17 +114,17 @@ export function Dashboard() {
     getNotes(currentPage);
   }, [getNotes, currentPage]);
 
-  const handlePreviousPage = () => {
+  const handlePreviousPage = useCallback(() => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-  };
+  }, [currentPage]);
 
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
-  };
+  }, [currentPage, totalPages]);
 
   const { register, handleSubmit, watch, reset } = useForm<SearchFormType>({
     resolver: zodResolver(SearchFormSchema),
@@ -143,6 +143,7 @@ export function Dashboard() {
 
       if (searchValue.length === 0) {
         getNotes(1);
+        setCurrentPage(1);
       }
     }, 300); // 300ms debounce
 
@@ -176,8 +177,8 @@ export function Dashboard() {
               <div
                 className={`flex flex-wrap gap-2 transition-transform duration-300 ease-in-out ${
                   showColorButtons
-                    ? "translate-x-0 opacity-100"
-                    : "translate-x-4 opacity-0"
+                    ? "not-sr-only translate-x-0"
+                    : "sr-only translate-x-3"
                 }`}
               >
                 {buttonColors.map((color) => (

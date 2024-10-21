@@ -54,7 +54,7 @@ export function FormLogin() {
 
       setTimeout(() => {
         setLoading(false); // End loading
-      }, 2000);
+      }, 1000);
 
       toast.success("Login successful!", {
         position: "top-right",
