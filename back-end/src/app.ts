@@ -1,9 +1,11 @@
-import express from 'express';
+import express, { Request } from 'express';
 import route from './routes/routes';
 import cors from 'cors';
 import mongoSanitize from 'express-mongo-sanitize';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import requestIp from 'request-ip';
+
 const allowedOrigins: string[] = [
     'http://127.0.0.1',
     'http://localhost:5173',
@@ -29,6 +31,11 @@ const corsOptions: cors.CorsOptions = {
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     limit: 100,
+    keyGenerator: (req: Request) => {
+        if (!req.clientIp) throw new Error('what is wrong with your ip');
+
+        return req.clientIp;
+    },
     message: 'Too many requests from this IP, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,
@@ -43,6 +50,7 @@ app.use(
     })
 );
 app.use(express.urlencoded({ extended: true }));
+app.use(requestIp.mw());
 app.use(limiter);
 app.use(express.json());
 app.use(route);
