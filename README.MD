@@ -6,7 +6,7 @@
 
 ## Use Cases.
 
-- ### with notes App you can create your personal account and customize it as you prefer, futhermore you can make cards pick Colors for them and customize titles and descriptions,Update cards and More !
+- ### with notes App you can create your personal account and customize it as you prefer, futhermore you can make cards pick Colors for them and customize titles and descriptions,Update cards and More !!
 
 ## Project Stack
 
