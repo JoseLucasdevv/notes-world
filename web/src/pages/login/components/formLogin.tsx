@@ -15,8 +15,7 @@ const formLoginSchema = z.object({
 });
 
 export function FormLogin() {
-  const { setCookie } = useContext(ProfileContext);
-  const { saveProfileData } = useContext(ProfileContext);
+  const { setCookie, saveProfileData } = useContext(ProfileContext);
   const [loading, setLoading] = useState<boolean>(false);
 
   const {
@@ -102,14 +101,14 @@ export function FormLogin() {
 
         <input
           {...register("email")}
-          className="::placeholder:text-gray-400 w-full rounded px-5 py-2"
+          className="::placeholder:text-primary/60 w-full rounded border border-primary bg-white px-5 py-2 text-primary focus:ring-2 focus:ring-primary/40"
           id="email"
           type="text"
           placeholder="Your email"
         />
 
         {errors.email && (
-          <span className="text-sm text-red-500">{errors.email?.message}</span>
+          <span className="text-sm text-primary">{errors.email?.message}</span>
         )}
       </div>
 
@@ -121,13 +120,13 @@ export function FormLogin() {
 
         <input
           {...register("password")}
-          className="::placeholder:text-gray-400 w-full rounded px-5 py-2"
+          className="::placeholder:text-primary/60 w-full rounded border border-primary bg-white px-5 py-2 text-primary focus:ring-2 focus:ring-primary/40"
           id="password"
           type="password"
           placeholder="Your password"
         />
         {errors.password && (
-          <span className="text-sm text-red-500">
+          <span className="text-sm text-primary">
             {errors.password?.message}
           </span>
         )}
@@ -135,7 +134,7 @@ export function FormLogin() {
 
       {loading ? (
         <button
-          className="disable:bg-orange-200 flex w-full items-center justify-center rounded bg-white p-2 text-primary"
+          className="flex w-full items-center justify-center rounded bg-primary p-2 text-white transition hover:bg-primary/90"
           disabled
         >
           <Spinner className="animate-spin" size={24} />
@@ -143,7 +142,7 @@ export function FormLogin() {
       ) : (
         <button
           type="submit"
-          className="w-full rounded bg-white p-2 text-primary"
+          className="w-full rounded bg-primary p-2 text-white transition hover:bg-primary/90"
         >
           Login
         </button>

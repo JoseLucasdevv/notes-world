@@ -63,7 +63,7 @@ interface ProfileContextType {
   removeCookie: (name: "token", options?: CookieSetOptions) => void;
   removeProfileData: () => void;
   updateProfileData: (value: ProfileLocalStorageType) => void;
-  // ...restante do código do contexto...
+  saveProfileData: (value: ProfileLocalStorageType) => void;
 }
 
 export const ProfileContext = createContext<ProfileContextType>(
