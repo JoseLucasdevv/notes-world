@@ -4,12 +4,13 @@ import { DashboardLayouts } from "./layouts/DashboardLayouts";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Login } from "./pages/login/Login";
 import { Settings } from "./pages/Dashboard/Settings";
+import Onboarding from "./pages/Onboarding";
 
 export function Router() {
   return (
     <Routes>
       {/* Rotas públicas */}
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Onboarding />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
