@@ -59,11 +59,15 @@ export function EditeModalForm({ data, onRefresh }: EditeModalProps) {
 
   async function onChangeNote(dataForm: EditeModalForm) {
     try {
-      await axios.put(`http://localhost:3000/post/${dataForm.id}`, dataForm, {
-        headers: {
-          Authorization: `Bearer ${cookie.token}`,
+      await axios.put(
+        `${import.meta.env.VITE_API_SERVER_BACKEND}/post/${dataForm.id}`,
+        dataForm,
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.token}`,
+          },
         },
-      });
+      );
 
       toast.success("Note updated!", {
         position: "top-right",
